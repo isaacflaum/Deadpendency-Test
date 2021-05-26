@@ -1,0 +1,18 @@
+dependencies {
+    compile("org.apache.spark:spark-mllib$scalaCompatVer:$sparkVer")
+
+    runtime("com.google.cloud.bigdataoss:gcs-connector:$gcsConnectorVer")
+    runtime("org.apache.hadoop:hadoop-common:$hadoopVer")
+
+    compileAndJar("estalea.ir.eaa:eaa-paql:$paqlVer") { transitive = false }
+    compileAndJar("fq.platform:enrichers:$platformVer") {
+        exclude group: "fq.platform"
+        exclude group: "org.slf4j"
+        exclude group: "org.scala-lang", module: "scala-library"
+        exclude group: "commons-net", module: "commons-net"
+    }
+
+    testCompile("fq.platform:data-common:$dataCommonVer:tests") { transitive = false }
+    testCompile("org.apache.avro:avro-compiler:$avroVer")
+    testCompile("com.h2database:h2:$h2Ver")
+}
